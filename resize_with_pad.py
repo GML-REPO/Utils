@@ -12,12 +12,10 @@ def resize_with_pad(img, target_size=512):
     pad = 0
     
     if ratio > 1:
-        new_H = target_size
         new_W = target_size * W // H
         pad = target_size - new_W
     elif ratio < 1:
         new_H = target_size * H // W
-        new_W = target_size
         pad = target_size - new_H
         
     pad = pad // 2
