@@ -8,15 +8,15 @@ def resize_with_pad(img, target_size=512):
     if len(img.shape) == 3:
         C = img.shape[-1]
     ratio = H/W
-    new_H, new_W = H,W
+    new_H, new_W = target_size, target_size
     pad = 0
     
     if ratio > 1:
         new_H = target_size
-        new_W = target_size * new_W // H
+        new_W = target_size * W // H
         pad = target_size - new_W
     elif ratio < 1:
-        new_H = target_size * new_H // W
+        new_H = target_size * H // W
         new_W = target_size
         pad = target_size - new_H
         
@@ -33,6 +33,8 @@ def resize_with_pad(img, target_size=512):
         base[:, pad:new_W+pad] = new_img
     elif ratio < 1:
         base[pad:pad+new_H, :] = new_img
+    else:
+        base[:,:] = new_img
 
     return base
     
